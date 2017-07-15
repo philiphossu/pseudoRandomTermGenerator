@@ -6,13 +6,12 @@ from random import randint
 import decimal
 
 def systemGenerator(d):
-    #Empty list definition for systems & variables
+    #Definition for the master variable options
     masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
+    #Definition for lists
     system = []
     varList = []
     numTerms = []
-    coeffs = []
-    #exponents = []
 
     #Initialize variables list
     for a in range(0,d):
@@ -43,11 +42,7 @@ def systemGenerator(d):
         print(a)
     #Print out final system list
     for a in system:
-        print(a)
-        print(a.terms)
-        print(a.variables)
-        print(a.coefficients)
-        print(a.exponents)
+        a.printEqnDetails()
     return
 
 class newEquation(object):
@@ -60,6 +55,16 @@ class newEquation(object):
         self.variables = variables
         self.coefficients = coefficients
         self.exponents = exponents
-    def out(d):
+    def printEqnDetails(self):
+        for a in self:
+            print("Terms: ")
+            print(a.terms)
+            print("Variables: ")
+            print(a.variables)
+            print("Coefficients: ")
+            print(a.coefficients)
+            print("Exponents: ")
+            print(a.exponents)
+    def out(self, d):
         #Will ultimately output the equation in string format
         return
