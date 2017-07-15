@@ -1,4 +1,5 @@
 from random import randint
+import decimal
 
 def systemGenerator(d):
     #Empty list definition for systems & variables
@@ -7,7 +8,7 @@ def systemGenerator(d):
     varList = []
     numTerms = []
     coeffs = []
-    exponents = []
+    #exponents = []
     #Initialize variables list
     for a in range(0,d):
         for b in range(0,d):
@@ -17,8 +18,10 @@ def systemGenerator(d):
         numTerms.append(randint(1,d))
     #Initialize the system list with equation data so far
     for a in range(0,d):
-        system.append(newEquation(numTerms[a],varList, None, None))
-
+        system.append(newEquation(numTerms[a],varList, [], []))
+    #Add d number of coefficients to each equation object
+    for a in range(0,d):
+        system[a].exponents.append(float(decimal.Decimal(random.randrange(0, 1000))/100));
     #Print out number of terms list
     for a in numTerms:
         print(a)
@@ -40,6 +43,6 @@ class newEquation(object):
         self.variables = variables
         self.coefficients = coefficients
         self.exponents = exponents
-    def out():
+    def out(d):
         #Will ultimately output the equation in string format
         return
