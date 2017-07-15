@@ -21,7 +21,10 @@ def systemGenerator(d):
         system.append(newEquation(numTerms[a],varList, [], []))
     #Add d number of coefficients to each equation object
     for a in range(0,d):
-        system[a].exponents.append(float(decimal.Decimal(random.randrange(0, 1000))/100));
+        for b in range(0,d):
+            system[a].coefficients.append(random.randint(0,100)/random.randint(1,100));
+
+
     #Print out number of terms list
     for a in numTerms:
         print(a)
@@ -31,6 +34,10 @@ def systemGenerator(d):
     #Print out final system list
     for a in system:
         print(a)
+        print(a.terms)
+        print(a.variables)
+        print(a.coefficients)
+        print(a.exponents)
     return
 
 class newEquation(object):
