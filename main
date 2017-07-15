@@ -1,14 +1,19 @@
+#Goal: Generate a square system with d variables/equations
+#having random coefficients, exponents, and number of terms.
+#Output this as a list. Supports d from 1 to 12 variables/equations.
+
 from random import randint
 import decimal
 
 def systemGenerator(d):
     #Empty list definition for systems & variables
-    masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h"]
+    masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
     system = []
     varList = []
     numTerms = []
     coeffs = []
     #exponents = []
+
     #Initialize variables list
     for a in range(0,d):
         for b in range(0,d):
@@ -18,12 +23,17 @@ def systemGenerator(d):
         numTerms.append(randint(1,d))
     #Initialize the system list with equation data so far
     for a in range(0,d):
-        system.append(newEquation(numTerms[a],varList, [], []))
+        system.append(newEquation(numTerms[a],[], [], []))
     #Add d number of coefficients to each equation object
     for a in range(0,d):
         for b in range(0,d):
-            system[a].coefficients.append(random.randint(0,100)/random.randint(1,100));
-
+            system[a].coefficients.append(randint(0,100)/randint(1,100));
+    #Only add variables equal to the correct number of terms
+    for a in range(0,d):
+        for b in range(0,(d*numTerms[a])):
+            system[a].variables.append(varList[b])
+            #Also add random exponents to the equation for this same number of variables
+            system[a].exponents.append(randint(0,30))
 
     #Print out number of terms list
     for a in numTerms:
