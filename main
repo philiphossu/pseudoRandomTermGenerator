@@ -4,16 +4,36 @@ def systemGenerator(d):
     #Empty list definition for systems & variables
     system = []
     varList = []
-    #Initialize number of spots in the system list
-    for _ in range(0,d):
-        system.append(None)
+    numTerms = []
+
+    #Initialize variables list
     for a in range(0,d):
         varList.append("x_"+str(a))
 
+    for _ in range(0,d):
+        numTerms.append(randint(1,d))
+
+    #Initialize number of spots in the system list
+    for _ in range(0,d):
+        system.append(None)
+
+    #Print out number of terms list
+    for a in numTerms:
+        print(a)
     #Print out variables list
     for a in varList:
-        print(a)]
+        print(a)
     #Print out final system list
     for a in system:
         print(a)
     return
+
+class newEquation(object):
+    def __init__(self, terms, variables, coefficients, exponents):
+        self.terms = terms
+        self.variables = variables
+        self.coefficients = coefficients
+        self.exponents = exponents
+    def out():
+        #Will ultimately output the equation in string format
+        return
