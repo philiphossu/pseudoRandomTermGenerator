@@ -1,12 +1,19 @@
 from random import randint
 
 def systemGenerator(d):
+    #Empty list definition for systems & variables
     system = []
+    varList = []
     #Initialize number of spots in the system list
-    for(_ in range(0,d)):
+    for _ in range(0,d):
         system.append(None)
+    for a in range(0,d):
+        varList.append("x_"+str(a))
 
+    #Print out variables list
+    for a in varList:
+        print(a)]
     #Print out final system list
-    for(a in system):
+    for a in system:
         print(a)
     return
