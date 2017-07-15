@@ -2,20 +2,22 @@ from random import randint
 
 def systemGenerator(d):
     #Empty list definition for systems & variables
+    masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h"]
     system = []
     varList = []
     numTerms = []
-
+    coeffs = []
+    exponents = []
     #Initialize variables list
     for a in range(0,d):
-        varList.append("x_"+str(a))
-
+        for b in range(0,d):
+            varList.append(masterVarOptions[b]+"_"+str(a))
+    #Initialize the number of terms for each equation
     for _ in range(0,d):
         numTerms.append(randint(1,d))
-
-    #Initialize number of spots in the system list
-    for _ in range(0,d):
-        system.append(None)
+    #Initialize the system list with equation data so far
+    for a in range(0,d):
+        system.append(newEquation(numTerms[a],varList, None, None))
 
     #Print out number of terms list
     for a in numTerms:
@@ -29,6 +31,10 @@ def systemGenerator(d):
     return
 
 class newEquation(object):
+    terms = []
+    variables = []
+    coefficients = []
+    exponents = []
     def __init__(self, terms, variables, coefficients, exponents):
         self.terms = terms
         self.variables = variables
