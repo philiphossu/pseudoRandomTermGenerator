@@ -59,14 +59,18 @@ class newEquation(object):
     def out(self):
         outstr = ""
         i = 0
-        for a in self.coefficients:
-            outstr += str(a)+"("
-            for b in self.variables:
-                outstr += str(b)+"^"+str(self.exponents[i])+"*"
-                #+str(self.exponents[i])+"*"
-                print(i)
-                print(self.exponents[i])
+        for a in range(0, len(self.coefficients)):
+            outstr += str(self.coefficients[a])+"("
+            for b in range(0,len(self.variables)):
+                outstr += str(self.variables[b])+"^"+str(self.exponents[i])
+                if b!= len(self.variables)-1:
+                    outstr += "*"
+                #print(i)
+                #print(self.exponents)
                 i += 1
+            if a != len(self.coefficients)-1:
+                outstr += ")+"
+            i = 0
         return outstr
 
 def printEqnDetails(eqns):
