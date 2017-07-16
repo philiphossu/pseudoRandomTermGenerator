@@ -68,8 +68,9 @@ class newEquation(object):
                 #print(i)
                 #print(self.exponents)
                 i += 1
+            outstr += ")"
             if a != len(self.coefficients)-1:
-                outstr += ")+"
+                outstr += "+"
             i = 0
         return outstr
 
