@@ -13,11 +13,6 @@ def systemGenerator(d):
     varList = []
     numTerms = []
 
-    #Initialize variables list
-    '''for a in range(0,d):
-        for b in range(0,d):
-            varList.append(masterVarOptions[b]+"_"+str(a))
-    '''
     for a in range(0,d):
         varList.append(masterVarOptions[a])
     #Initialize the number of terms for each equation
@@ -30,11 +25,6 @@ def systemGenerator(d):
     for a in range(0,d):
         for b in range(0,system[a].terms):
             system[a].coefficients.append(randint(0,100)/randint(1,100));
-    #Add variables equal to the correct number of terms
-    '''for a in range(0,d):
-        for b in range(0,(numTerms[a])):
-            system[a].variables.append(varList[b])'''
-
     #Also add random exponents to the equation
     for a in range(0,d):
         for b in range(0,(system[a].terms*len(system[a].variables))):
@@ -71,17 +61,11 @@ class newEquation(object):
         i = 0
         for a in range(0, len(self.coefficients)):
             outstr += str(self.coefficients[a])+"("
-            #for b in range(counter,counter+d):
             for b in range(0,d):
-                #print("Adding to string: ",str(self.variables[b]))
                 outstr += str(self.variables[b])
-                #print("Adding to string: ^")
                 outstr +="^"
-                #print("Adding to string: ",str(self.exponents[i]))
                 outstr += str(self.exponents[i])
                 if(b%d != d-1):
-                    #print("b: ",b)
-                    #print("added star")
                     outstr += "*"
                 i += 1
                 counter += 1
@@ -90,7 +74,6 @@ class newEquation(object):
             outstr += ")"
             if a != len(self.coefficients)-1:
                 outstr += "+"
-            #i = 0
         return outstr
 
 def printEqnDetails(eqns):
