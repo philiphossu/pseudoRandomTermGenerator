@@ -14,24 +14,30 @@ def systemGenerator(d):
     numTerms = []
 
     #Initialize variables list
-    for a in range(0,d):
+    '''for a in range(0,d):
         for b in range(0,d):
             varList.append(masterVarOptions[b]+"_"+str(a))
+    '''
+    for a in range(0,d):
+        varList.append(masterVarOptions[a])
     #Initialize the number of terms for each equation
     for _ in range(0,d):
         numTerms.append(randint(1,d))
     #Initialize the system list with equation data so far
     for a in range(0,d):
-        system.append(newEquation(numTerms[a],[], [], []))
+        system.append(newEquation(numTerms[a],varList, [], []))
     #Add d number of coefficients to each equation object
     for a in range(0,d):
         for b in range(0,system[a].terms):
             system[a].coefficients.append(randint(0,100)/randint(1,100));
-    #Only add variables equal to the correct number of terms
+    #Add variables equal to the correct number of terms
+    '''for a in range(0,d):
+        for b in range(0,(numTerms[a])):
+            system[a].variables.append(varList[b])'''
+
+    #Also add random exponents to the equation
     for a in range(0,d):
-        for b in range(0,(d*numTerms[a])):
-            system[a].variables.append(varList[b])
-            #Also add random exponents to the equation for this same number of variables
+        for b in range(0,(system[a].terms*len(system[a].variables))):
             system[a].exponents.append(randint(0,30))
 
     #Print out number of terms list
@@ -58,12 +64,18 @@ class newEquation(object):
         self.exponents = exponents
     def out(self, d):
         outstr = ""
-        i = 0
         counter = 0
         for a in range(0, len(self.coefficients)):
+            i = 0
             outstr += str(self.coefficients[a])+"("
-            for b in range(counter,counter+d):
-                outstr += str(self.variables[b])+"^"+str(self.exponents[i])
+            #for b in range(counter,counter+d):
+            for b in range(0,d):
+                print("Adding to string: ",str(self.variables[b]))
+                outstr += str(self.variables[b])
+                print("Adding to string: ^")
+                outstr +="^"
+                print("Adding to string: ",str(self.exponents[i]))
+                outstr += str(self.exponents[i])
                 if(b%d != d-1):
                     #print("b: ",b)
                     #print("added star")
