@@ -59,16 +59,19 @@ class newEquation(object):
     def out(self, d):
         outstr = ""
         i = 0
-        #temp = 0
+        counter = 0
         for a in range(0, len(self.coefficients)):
             outstr += str(self.coefficients[a])+"("
-            for b in range(0,d):
+            for b in range(counter,counter+d):
                 outstr += str(self.variables[b])+"^"+str(self.exponents[i])
-                #if b!= len(self.variables)-1:
-                outstr += "*"
-                #print(i)
-                #print(self.exponents)
+                if(b%d != d-1):
+                    #print("b: ",b)
+                    #print("added star")
+                    outstr += "*"
                 i += 1
+                counter += 1
+                if(counter == len(self.variables)):
+                    break
             outstr += ")"
             if a != len(self.coefficients)-1:
                 outstr += "+"
