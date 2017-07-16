@@ -25,7 +25,7 @@ def systemGenerator(d):
         system.append(newEquation(numTerms[a],[], [], []))
     #Add d number of coefficients to each equation object
     for a in range(0,d):
-        for b in range(0,d):
+        for b in range(0,system[a].numTerms):
             system[a].coefficients.append(randint(0,100)/randint(1,100));
     #Only add variables equal to the correct number of terms
     for a in range(0,d):
@@ -41,8 +41,7 @@ def systemGenerator(d):
     for a in varList:
         print(a)
     #Print out final system list
-    for a in system:
-        a.printEqnDetails()
+    printEqnDetails(system)
     return
 
 class newEquation(object):
@@ -55,16 +54,17 @@ class newEquation(object):
         self.variables = variables
         self.coefficients = coefficients
         self.exponents = exponents
-    def printEqnDetails(self):
-        for a in self:
-            print("Terms: ")
-            print(a.terms)
-            print("Variables: ")
-            print(a.variables)
-            print("Coefficients: ")
-            print(a.coefficients)
-            print("Exponents: ")
-            print(a.exponents)
     def out(self, d):
         #Will ultimately output the equation in string format
         return
+
+def printEqnDetails(eqns):
+    for a in eqns:
+        print("Terms: ")
+        print(a.terms)
+        print("Variables: ")
+        print(a.variables)
+        print("Coefficients: ")
+        print(a.coefficients)
+        print("Exponents: ")
+        print(a.exponents)
