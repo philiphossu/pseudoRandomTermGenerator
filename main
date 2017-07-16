@@ -47,9 +47,12 @@ def systemGenerator(d):
     for a in varList:
         print(a)
     #Print out final system list
+    test = []
     printEqnDetails(system)
-    test = system[0].out(d)
-    print(test)
+    print("=======Equations========")
+    for a in range(0,len(system)):
+        test.append(system[a].out(d))
+        print(test[a])
     return
 
 class newEquation(object):
@@ -65,16 +68,16 @@ class newEquation(object):
     def out(self, d):
         outstr = ""
         counter = 0
+        i = 0
         for a in range(0, len(self.coefficients)):
-            i = 0
             outstr += str(self.coefficients[a])+"("
             #for b in range(counter,counter+d):
             for b in range(0,d):
-                print("Adding to string: ",str(self.variables[b]))
+                #print("Adding to string: ",str(self.variables[b]))
                 outstr += str(self.variables[b])
-                print("Adding to string: ^")
+                #print("Adding to string: ^")
                 outstr +="^"
-                print("Adding to string: ",str(self.exponents[i]))
+                #print("Adding to string: ",str(self.exponents[i]))
                 outstr += str(self.exponents[i])
                 if(b%d != d-1):
                     #print("b: ",b)
