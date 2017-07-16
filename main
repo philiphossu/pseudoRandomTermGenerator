@@ -1,49 +1,53 @@
 #Goal: Generate a square system with d variables/equations
 #having random coefficients, exponents, and number of terms.
-#Output this as a list. Supports d from 1 to 12 variables/equations.
+#Output the final equations. Supports d from 1 to 1 variables/equations.
 
 from random import randint
 import decimal
 
-def systemGenerator(d):
+def systemGenerator(d, deb):
     #Definition for the master variable options
-    masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"]
+    masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r"]
     #Definition for lists
     system = []
     varList = []
     numTerms = []
+    #Definition for debug
+    debug = deb
 
+    #First initialization steps
     for a in range(0,d):
+        #Determine how many variables are going to be used, d number of variables
         varList.append(masterVarOptions[a])
-    #Initialize the number of terms for each equation
-    for _ in range(0,d):
+        #Initialize random number of terms for each equation, d number of equations
         numTerms.append(randint(1,d))
-    #Initialize the system list with equation data so far
-    for a in range(0,d):
+        #Initialize the system with the known equation data so far
         system.append(newEquation(numTerms[a],varList, [], []))
+
     #Add d number of coefficients to each equation object
     for a in range(0,d):
         for b in range(0,system[a].terms):
-            system[a].coefficients.append(randint(0,100)/randint(1,100));
-    #Also add random exponents to the equation
+            system[a].coefficients.append(round(randint(0,100)/randint(1,100), 4));
+    #Add random exponents to the equation
     for a in range(0,d):
         for b in range(0,(system[a].terms*len(system[a].variables))):
             system[a].exponents.append(randint(0,30))
 
-    #Print out number of terms list
-    for a in numTerms:
-        print(a)
-    #Print out variables list
-    for a in varList:
-        print(a)
-    #Print out final system list
-    test = []
-    printEqnDetails(system)
-    print("=======Equations========")
+    #Debug for system details before they are string-ified
+    if(debug):
+        #Print out number of terms list
+        for a in numTerms:
+            print(a)
+        #Print out variables list
+        for a in varList:
+            print(a)
+        printEqnDetails(system)
+
+    #Return out final system list
+    finalSystem = []
     for a in range(0,len(system)):
-        test.append(system[a].out(d))
-        print(test[a])
-    return
+        finalSystem.append(system[a].out(d))
+    return finalSystem
 
 class newEquation(object):
     terms = []
@@ -62,8 +66,11 @@ class newEquation(object):
         for a in range(0, len(self.coefficients)):
             outstr += str(self.coefficients[a])+"("
             for b in range(0,d):
+                #print("Adding to string: ",str(self.variables[b]))
                 outstr += str(self.variables[b])
+                #print("Adding to string: ^")
                 outstr +="^"
+                #print("Adding to string: ",str(self.exponents[i]))
                 outstr += str(self.exponents[i])
                 if(b%d != d-1):
                     outstr += "*"
@@ -86,3 +93,16 @@ def printEqnDetails(eqns):
         print(a.coefficients)
         print("Exponents: ")
         print(a.exponents)
+
+def main():
+    output = systemGenerator(4, False)
+    print("=======Equations========")
+    print("system = {")
+    for a in range(0,len(output)):
+        if a != len(output)-1:
+            print(output[a],",")
+        else:
+            print(output[a])
+    print("}")
+    
+main()
