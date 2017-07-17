@@ -12,8 +12,6 @@ def systemGenerator(d, constant, deb):
     system = []
     varList = []
     numTerms = []
-    #Definition for debug
-    debug = deb
 
     #First initialization steps
     for a in range(0,d):
@@ -36,7 +34,7 @@ def systemGenerator(d, constant, deb):
             system[a].exponents.append(randint(0,30))
 
     #Debug for system details before they are string-ified
-    if(debug):
+    if(deb):
         #Print out number of terms list
         for a in numTerms:
             print(a)
@@ -82,7 +80,6 @@ class newEquation(object):
                 counter += 1
                 if(counter == len(self.variables)):
                     break
-            #outstr += ")"
             if a != len(self.coefficients)-1:
                 outstr += "+"
         outstr += "+"
