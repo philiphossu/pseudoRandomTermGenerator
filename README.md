@@ -1,4 +1,4 @@
-#Random System Generator
+# ${1:Project Name}
 
 ##Currently Working On...
 
