@@ -5,7 +5,7 @@
 from random import randint
 import decimal
 
-def systemGenerator(d, deb):
+def systemGenerator(d, constant, deb):
     #Definition for the master variable options
     masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r"]
     #Definition for lists
@@ -22,12 +22,14 @@ def systemGenerator(d, deb):
         #Initialize random number of terms for each equation, d number of equations
         numTerms.append(randint(1,d))
         #Initialize the system with the known equation data so far
-        system.append(newEquation(numTerms[a],varList, [], []))
+        system.append(newEquation(numTerms[a],varList, [], [], []))
 
     #Add d number of coefficients to each equation object
     for a in range(0,d):
+        if(constant):
+            system[a].constant.append(round(randint(0,100)/randint(1,100), 4))
         for b in range(0,system[a].terms):
-            system[a].coefficients.append(round(randint(0,100)/randint(1,100), 4));
+            system[a].coefficients.append(round(randint(0,100)/randint(1,100), 4))
     #Add random exponents to the equation
     for a in range(0,d):
         for b in range(0,(system[a].terms*len(system[a].variables))):
@@ -54,11 +56,13 @@ class newEquation(object):
     variables = []
     coefficients = []
     exponents = []
-    def __init__(self, terms, variables, coefficients, exponents):
+    constant = []
+    def __init__(self, terms, variables, coefficients, exponents, constant):
         self.terms = terms
         self.variables = variables
         self.coefficients = coefficients
         self.exponents = exponents
+        self.constant = constant
     def out(self, d):
         outstr = ""
         counter = 0
@@ -81,6 +85,8 @@ class newEquation(object):
             #outstr += ")"
             if a != len(self.coefficients)-1:
                 outstr += "+"
+        outstr += "+"
+        outstr += str(self.constant[0])
         return outstr
 
 def printEqnDetails(eqns):
@@ -93,9 +99,11 @@ def printEqnDetails(eqns):
         print(a.coefficients)
         print("Exponents: ")
         print(a.exponents)
+        print("Constant: ")
+        print(a.constant)
 
 def main():
-    output = systemGenerator(4, False)
+    output = systemGenerator(4, True, False)
     print("=======Equations========")
     print("system = {")
     for a in range(0,len(output)):
