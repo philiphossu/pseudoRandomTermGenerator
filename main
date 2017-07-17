@@ -64,7 +64,7 @@ class newEquation(object):
         counter = 0
         i = 0
         for a in range(0, len(self.coefficients)):
-            outstr += str(self.coefficients[a])+"("
+            outstr += str(self.coefficients[a])+"*"
             for b in range(0,d):
                 #print("Adding to string: ",str(self.variables[b]))
                 outstr += str(self.variables[b])
@@ -78,7 +78,7 @@ class newEquation(object):
                 counter += 1
                 if(counter == len(self.variables)):
                     break
-            outstr += ")"
+            #outstr += ")"
             if a != len(self.coefficients)-1:
                 outstr += "+"
         return outstr
@@ -104,5 +104,5 @@ def main():
         else:
             print(output[a])
     print("}")
-    
+
 main()
