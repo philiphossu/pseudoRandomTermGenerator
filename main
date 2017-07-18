@@ -1,10 +1,12 @@
 #Goal: Generate a square system with d variables/equations
 #having random coefficients, exponents, and number of terms.
-#Output the final equations. Supports d from 1 to 1 variables/equations.
+#Output the final equations. Supports d from 1 to 18 variables/equations.
 
+#Import statements
 from random import randint
 import decimal
 
+#Definition of main system generator function
 def systemGenerator(d, constant, deb):
     #Definition for the master variable options
     masterVarOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r"]
@@ -22,14 +24,18 @@ def systemGenerator(d, constant, deb):
         #Initialize the system with the known equation data so far
         system.append(newEquation(numTerms[a],varList, [], [], []))
 
-    #Add d number of coefficients to each equation object
+    #Second initialization steps - adding to the created equations
     for a in range(0,d):
+        #If the constant option is true, generate a constant for each equation
         if(constant):
             system[a].constant.append(round(randint(0,100)/randint(1,100), 4))
+        #Generate d number of coefficients to each equation object
         for b in range(0,system[a].terms):
             system[a].coefficients.append(round(randint(0,100)/randint(1,100), 4))
-    #Add random exponents to the equation
+
+    #Third initialization steps
     for a in range(0,d):
+        #Add random exponents to the equation
         for b in range(0,(system[a].terms*len(system[a].variables))):
             system[a].exponents.append(randint(0,30))
 
@@ -49,6 +55,7 @@ def systemGenerator(d, constant, deb):
         finalSystem.append(system[a].out(d))
     return finalSystem
 
+#Definition of equation objects and important out method used in systemGenerator
 class newEquation(object):
     terms = []
     variables = []
@@ -61,6 +68,7 @@ class newEquation(object):
         self.coefficients = coefficients
         self.exponents = exponents
         self.constant = constant
+    #Out is the function used to convert the pieces of the equation to an M2 string format
     def out(self, d):
         outstr = ""
         counter = 0
@@ -86,6 +94,7 @@ class newEquation(object):
         outstr += str(self.constant[0])
         return outstr
 
+#Definition of a helper function to print equation details if debug is on
 def printEqnDetails(eqns):
     for a in eqns:
         print("Terms: ")
@@ -99,8 +108,9 @@ def printEqnDetails(eqns):
         print("Constant: ")
         print(a.constant)
 
+#Main calls systemGenerator and prints out the result
 def main():
-    output = systemGenerator(4, True, False)
+    output = systemGenerator(5, True, False)
     print("=======Equations========")
     print("system = {")
     for a in range(0,len(output)):
