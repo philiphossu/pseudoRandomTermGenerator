@@ -73,19 +73,25 @@ class newEquation(object):
         outstr = ""
         counter = 0
         i = 0
+        #For each coefficient...
         for a in range(0, len(self.coefficients)):
+            #Write the coefficient
             outstr += str(self.coefficients[a])+"*"
+            #For d number of items...
             for b in range(0,d):
+                #Add the variables and exponents related to that coefficient
                 #print("Adding to string: ",str(self.variables[b]))
                 outstr += str(self.variables[b])
                 #print("Adding to string: ^")
                 outstr +="^"
                 #print("Adding to string: ",str(self.exponents[i]))
                 outstr += str(self.exponents[i])
+                #If the item in question is the last in the set, do not put a *
                 if(b%d != d-1):
                     outstr += "*"
                 i += 1
                 counter += 1
+                #Once you get to the end of the variables list, break out of this loop
                 if(counter == len(self.variables)):
                     break
             if a != len(self.coefficients)-1:
