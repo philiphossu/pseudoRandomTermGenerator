@@ -1,6 +1,5 @@
-#Goal: Generate a square system with d variables/equations
-#having random coefficients, exponents, and number of terms.
-#Output the final equations. Supports d from 1 to 18 variables/equations.
+#Goal: Generate pseudo random terms which can be appended to
+#established systems. Admittedly is not random in the correct sense.
 
 #Import statements
 from random import randint
